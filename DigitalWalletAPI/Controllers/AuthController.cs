@@ -15,6 +15,12 @@ namespace DigitalWalletAPI.Controllers
             _authService = authService;
         }
 
+        [HttpGet("test")]
+        public async Task<IActionResult> Test()
+        {
+            return Ok(new {message = "API is runngin"});
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
