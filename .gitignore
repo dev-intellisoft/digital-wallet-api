@@ -2,3 +2,6 @@ bin
 obj
 .vscode
 digitalwallet.db
+build
+publish
+.idea
