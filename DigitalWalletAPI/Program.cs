@@ -4,12 +4,24 @@ using DigitalWalletAPI.Data;
 using DigitalWalletAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicionar suporte ao Entity Framework com SQLite
+DotNetEnv.Env.Load();
+
+var connectionString =
+    $"Host={Environment.GetEnvironmentVariable("POSTGRES_HOST")};" +
+    $"Port={Environment.GetEnvironmentVariable("POSTGRES_PORT")};" +
+    $"Database={Environment.GetEnvironmentVariable("POSTGRES_DB")};" +
+    $"Username={Environment.GetEnvironmentVariable("POSTGRES_USER")};" +
+    $"Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")}";
+
+Console.WriteLine($"[DB] Connecting to: {connectionString}");
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString(connectionString)));
 
 // Adicionar serviços e controladores
 builder.Services.AddControllers();
