@@ -12,7 +12,8 @@ services:
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=digitalwallet;Username=postgres;Password=yourpassword
     volumes:
       - ./backend/DigitalWalletAPI:/app
-
+    command: ["/bin/sh", "-c", "chmod +x /app/init.sh && /app/init.sh && dotnet DigitalWalletAPI.dll"]
+    
   postgres:
     image: postgres:latest
     environment:

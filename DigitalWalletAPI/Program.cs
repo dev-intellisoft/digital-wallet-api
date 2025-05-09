@@ -20,8 +20,11 @@ var connectionString =
 Console.WriteLine($"[DB] Connecting to: {connectionString}");
 
 
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseNpgsql(builder.Configuration.GetConnectionString(connectionString)));
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString(connectionString)));
+    options.UseNpgsql(connectionString));
 
 // Adicionar serviços e controladores
 builder.Services.AddControllers();
