@@ -1,19 +1,7 @@
 
 services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    depends_on:
-      - postgres
-    environment:
-      - ConnectionStrings__DefaultConnection=Host=postgres;Database=digitalwallet;Username=postgres;Password=yourpassword
-    volumes:
-      - ./backend/DigitalWalletAPI:/app
-    command: ["/bin/sh", "-c", "chmod +x /app/init.sh && /app/init.sh && dotnet DigitalWalletAPI.dll"]
-    
+
+
   postgres:
     image: postgres:latest
     environment:
@@ -24,10 +12,28 @@ services:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    depends_on:
+      - postgres
+    # environment:
+    #   - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=ZooDb;User Id=sa;Password=YourStrong@Password123;TrustServerCertificate=true;
+    ports:
+      - "80:80"
+    networks:
+      - digital-wallet
 
 volumes:
   postgres_data:
 
+
+networks:
+  digital-wallet:
+    driver: bridge
 
 
 

@@ -1,13 +1,16 @@
 #!/bin/sh
 
-# Install dotnet-ef CLI tool
-dotnet tool install --global dotnet-ef
+echo "Hello from init.sh!"
+echo "Running database migrations..."
 
-# Ensure the tool path is in the PATH
-export PATH="$PATH:/root/.dotnet/tools"
+# # Install dotnet-ef CLI tool
+# dotnet tool install --global dotnet-ef
 
-# Navigate to the project directory
-cd /app
+# # Ensure the tool path is in the PATH
+# export PATH="$PATH:/root/.dotnet/tools"
 
-# Apply EF Core migrations
-dotnet ef database update
+# # Navigate to the project directory
+# cd /app
+
+# # Apply EF Core migrations
+# dotnet ef database update

@@ -10,14 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 DotNetEnv.Env.Load();
 
-var connectionString =
-    $"Host={Environment.GetEnvironmentVariable("POSTGRES_HOST")};" +
-    $"Port={Environment.GetEnvironmentVariable("POSTGRES_PORT")};" +
-    $"Database={Environment.GetEnvironmentVariable("POSTGRES_DB")};" +
-    $"Username={Environment.GetEnvironmentVariable("POSTGRES_USER")};" +
-    $"Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")}";
-
-Console.WriteLine($"[DB] Connecting to: {connectionString}");
+var connectionString = "Host=postgres;Port=5432;Database=digital_wallet;Username=digital_wallet;Password=wallet123;SSL Mode=Disable";
 
 
 // builder.Services.AddDbContext<ApplicationDbContext>(options =>
